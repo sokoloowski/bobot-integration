@@ -1,0 +1,35 @@
+[
+    {
+        "group": "team-bo",
+        "points": 0,
+        "issues": [
+            "tableaux is unable to correctly determine if a solution is optimal",
+            "tableaux is unable to choose entering variable properly",
+            "tableaux is unable to detect unbounded problem",
+            "tableaux is unable to choose leaving variable properly",
+            "tableaux incorrectly pivots a table",
+            "model does not have constraints",
+            "code raises an exception"
+        ],
+        "errors": []
+    },
+    {
+        "group": "besties",
+        "points": 9,
+        "issues": ["tableaux is unable to detect unbounded problem"],
+        "errors": []
+    },
+    {
+        "group": "a-a2",
+        "points": 2,
+        "issues": [
+            "tableaux is unable to correctly determine if a solution is optimal",
+            "tableaux is unable to choose entering variable properly",
+            "tableaux is unable to detect unbounded problem",
+            "tableaux incorrectly pivots a table",
+            "model does not have constraints",
+            "code raises an exception"
+        ],
+        "errors": []
+    }
+]
