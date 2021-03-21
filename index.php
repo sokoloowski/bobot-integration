@@ -34,9 +34,11 @@ if (isset($_GET[ANTISPAM_CODE])) {
         });
         file_put_contents(__DIR__ . '/bobot.json', json_encode($db));
         $message = "";
+        $place = 1;
         foreach ($db as $team => $details) {
             $message .= '`' . ($place >= 10 ? $place : ' ' . $place) . '.` ' . $team .
                 ' - ' . $details['points'] . ' pkt' . PHP_EOL;
+            $place++;
         }
         $message .= '---' . PHP_EOL .
             '[Więcej informacji](http://' . $_SERVER['HTTP_HOST'] . BOBOT_HOME_DIR . 'results)' . PHP_EOL .
