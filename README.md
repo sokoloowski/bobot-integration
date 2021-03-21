@@ -8,7 +8,7 @@ This integration is for [Bobot](https://gitlab.com/bobot-is-a-bot) maintainers a
 2. Enter the necessary data in the configuration file (without message URL)
 3. Upload integration files to Your public server
 4. Send message via webhook. To do that, use following URL: `http://your-server.com/path/to/bobot/?ANTISPAM_KEY&message=YOUR_MESSAGE`. Replace `ANTISPAM_KEY` with the one from Your configuration.
-5. From Discord, copy Bobot message's ID (You'll probably need developer mode enabled) and update Your configuration. You may test it using [ReqBin](https://reqbin.com) and `sample.json`
+5. From Discord, copy Bobot's message ID (You'll probably need developer mode enabled) and update Your configuration. You may test it using [ReqBin](https://reqbin.com) and `sample.json`
 6. Configure Bobot HTTP request (or ask maintainers for it) - send HTTP POST request with `application/json` data to `http://your-server.com/path/to/bobot/?ANTISPAM_KEY`
 7. You can access Bobot website using `http://your-server.com/path/to/bobot/results`. See `config.php` for more URLs.
 
