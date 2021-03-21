@@ -71,7 +71,7 @@ if (isset($_GET[ANTISPAM_CODE])) {
         die(file_get_contents(__DIR__ . '/bobot.json'));
     } elseif (substr($_SERVER['REQUEST_URI'], 0, strlen(BOBOT_HOME_DIR . 'results')) == BOBOT_HOME_DIR . 'results') {
         $team_name = substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
-        echo heading('Błędy', 'Wykryte problemy u zespołu ' . $team_name, 'Zaktualizowano ' . $bobot_data[$team_name]['last_update']);
+        echo heading('Błędy', 'Wykryte problemy u zespołu ' . $team_name, 'Ostatnia aktualizacja: ' . $bobot_data[$team_name]['last_update']);
         echo table(['Lista błędów']);
         if (count($bobot_data[$team_name]['issues']) == 0)
             echo '<tr><td><code>Nie znaleziono problemów</code></td></tr>';
