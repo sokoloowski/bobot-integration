@@ -29,7 +29,7 @@ if (isset($_GET[ANTISPAM_CODE])) {
         }
         ksort($db);
         uasort($arr, function ($team1, $team2) {
-            return $team2['pkt'] <=> $team1['pkt'];
+            return $team2['points'] <=> $team1['points'];
         });
         file_put_contents(__DIR__ . '/bobot.json', json_encode($db));
         $message = "";
@@ -53,19 +53,17 @@ if (isset($_GET[ANTISPAM_CODE])) {
     echo 'Notification sent.';
 } else {
     $bobot_data = json_decode(file_get_contents(__DIR__ . '/bobot.json'), true);
-    usort($bobot_data, function ($team1, $team2) {
-        return $team2['points'] <=> $team1['points'];
-    });
     if ($_SERVER['REQUEST_URI'] == BOBOT_HOME_DIR . 'results') {
         echo heading('Ranking', 'Sprawdź swój wynik, porównaj go z innymi', true);
-        echo table(['#', 'Nazwa grupy', 'Punkty', '']);
-        foreach ($bobot_data as $key => $team) {
+        echo table(['#', 'Nazwa grupy', 'Punkty', 'Aktualizacja', '']);
+        foreach ($bobot_data as $team => $details) {
             $place = $key + 1;
             echo '<tr' . ($team['points'] == 10 ? ' class="winner"' : '') . '>
             <td>' . $place . '</td>
-            <td>' . $team['group'] . '</td>
-            <td>' . $team['points'] . '</td>
-            <td><a href="' . BOBOT_HOME_DIR . 'results/' . $team['group'] . '">Szczegóły&nbsp;»</td>
+            <td>' . $team . '</td>
+            <td>' . $details['points'] . '</td>
+            <td>' . $details['last_update'] . '</td>
+            <td><a href="' . BOBOT_HOME_DIR . 'results/' . $team . '">Szczegóły&nbsp;»</td>
           </tr>';
         }
         echo footer();
@@ -75,17 +73,17 @@ if (isset($_GET[ANTISPAM_CODE])) {
         $team_name = substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
         echo heading('Błędy', 'Wykryte problemy u zespołu ' . $team_name);
         echo table(['Lista błędów']);
-        foreach ($bobot_data as $team) {
+        foreach ($bobot_data as $team => $details) {
             if ($team['group'] == $team_name) {
-                foreach ($team['issues'] as $issue)
+                foreach ($details['issues'] as $issue)
                     echo '<tr><td><code>' . $issue . '</code></td></tr>';
-                if (count($team['issues']) == 0)
+                if (count($details['issues']) == 0)
                     echo '<tr><td><code>Nie znaleziono problemów</code></td></tr>';
                 echo '</tbody></table>';
                 echo table(['Problemy z repozytorium']);
-                foreach ($team['errors'] as $error)
+                foreach ($details['errors'] as $error)
                     echo '<tr><td><code>' . $error . '</code></td></tr>';
-                if (count($team['errors']) == 0)
+                if (count($details['errors']) == 0)
                     echo '<tr><td><code>Nie znaleziono problemów</code></td></tr>';
             }
         }
