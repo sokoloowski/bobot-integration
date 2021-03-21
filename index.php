@@ -28,7 +28,7 @@ if (isset($_GET[ANTISPAM_CODE])) {
             ];
         }
         ksort($db);
-        uasort($arr, function ($team1, $team2) {
+        uasort($db, function ($team1, $team2) {
             return $team2['points'] <=> $team1['points'];
         });
         file_put_contents(__DIR__ . '/bobot.json', json_encode($db));
