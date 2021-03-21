@@ -1,4 +1,11 @@
 <?php
+/**
+ * Bobot URLs:
+ * /bobot/?ANTISPAM             used to send data and messages
+ * /bobot/results               leaderboard
+ * /bobot/results/raw           raw information from Bobot
+ * /bobot/results/team-name     details
+ */
 
 // this one is used as simple antispam, generate on https://www.random.org/strings/
 define('ANTISPAM_CODE', 'your-secret-random-string');
