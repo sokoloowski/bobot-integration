@@ -76,7 +76,7 @@ function update_discord_message($message, $message_url)
         'content' => '',
         'embeds' => [[
             "title" => 'Ranking',
-            "url" => BOBOT_HOME_DIR . 'results',
+            "url" => 'http://' . $_SERVER['HTTP_HOST'] . BOBOT_HOME_DIR . 'results',
             "description" => $message,
             "color" => 2112851
         ]],
