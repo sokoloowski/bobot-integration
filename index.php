@@ -53,7 +53,7 @@ if (isset($_GET[ANTISPAM_CODE])) {
 } else {
     $bobot_data = json_decode(file_get_contents(__DIR__ . '/bobot.json'), true);
     if ($_SERVER['REQUEST_URI'] == BOBOT_HOME_DIR . 'results') {
-        echo heading('Ranking', 'Sprawdź swój wynik, porównaj go z innymi', true);
+        echo heading('Ranking', 'Sprawdź swój wynik, porównaj go z innymi', '', true);
         echo table(['#', 'Nazwa grupy', 'Punkty', 'Aktualizacja', '']);
         $place = 1;
         foreach ($bobot_data as $team => $details) {
@@ -71,22 +71,20 @@ if (isset($_GET[ANTISPAM_CODE])) {
         die(file_get_contents(__DIR__ . '/bobot.json'));
     } elseif (substr($_SERVER['REQUEST_URI'], 0, strlen(BOBOT_HOME_DIR . 'results')) == BOBOT_HOME_DIR . 'results') {
         $team_name = substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
-        echo heading('Błędy', 'Wykryte problemy u zespołu ' . $team_name);
+        echo heading('Błędy', 'Wykryte problemy u zespołu ' . $team_name, 'Zaktualizowano ' . $bobot_data[$team_name]['last_updated']);
         echo table(['Lista błędów']);
-        foreach ($bobot_data as $team => $details) {
-            if ($team == $team_name) {
-                foreach ($details['issues'] as $issue)
-                    echo '<tr><td><code>' . $issue . '</code></td></tr>';
-                if (count($details['issues']) == 0)
-                    echo '<tr><td><code>Nie znaleziono problemów</code></td></tr>';
-                echo '</tbody></table>';
-                echo table(['Problemy z repozytorium']);
-                foreach ($details['errors'] as $error)
-                    echo '<tr><td><code>' . $error . '</code></td></tr>';
-                if (count($details['errors']) == 0)
-                    echo '<tr><td><code>Nie znaleziono problemów</code></td></tr>';
-            }
-        }
+        if (count($$bobot_data[$team_name]['issues']) == 0)
+            echo '<tr><td><code>Nie znaleziono problemów</code></td></tr>';
+        else
+            foreach ($bobot_data[$team_name]['issues'] as $issue)
+                echo '<tr><td><code>' . $issue . '</code></td></tr>';
+        echo '</tbody></table>';
+        echo table(['Problemy z repozytorium']);
+        if (count($$bobot_data[$team_name]['errors']) == 0)
+            echo '<tr><td><code>Nie znaleziono problemów</code></td></tr>';
+        else
+            foreach ($$bobot_data[$team_name]['errors'] as $error)
+                echo '<tr><td><code>' . $error . '</code></td></tr>';
         echo footer();
     } else {
         header('Location: ' . BOBOT_HOME_DIR . 'results');

@@ -1,6 +1,6 @@
 <?php
 
-function heading($header, $subheader, $leaderboard = false)
+function heading($header, $subheader, $paragraph = '', $leaderboard = false)
 {
     return '<!DOCTYPE html><html lang="pl"><head>
         <meta charset="utf-8">
@@ -28,13 +28,9 @@ function heading($header, $subheader, $leaderboard = false)
 
 function table($header)
 {
-    $res = '<table class="table table-striped table-sm">
-                  <thead>
-                    <tr>';
+    $res = '<table class="table table-striped table-sm"><thead><tr>';
     foreach ($header as $th) $res .= "<th>$th</th>";
-    $res .= '</tr>
-                  </thead>
-                  <tbody>';
+    $res .= '</tr></thead><tbody>';
     echo $res;
 }
 
