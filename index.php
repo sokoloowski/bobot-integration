@@ -9,6 +9,7 @@ if (isset($_GET[ANTISPAM_CODE])) {
         send_discord_message($_GET['message'], DISCORD_WEBHOOK);
     } else {
         $json = file_get_contents('php://input');
+        if ($json == '') die('Empty message! Aborting...');
         $log_path = __DIR__ . '/logs/' . date('Y-m-d');
         if (!is_dir($log_path))
             mkdir($log_path);
