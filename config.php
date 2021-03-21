@@ -20,7 +20,8 @@ define('DISCORD_WEBHOOK_LOG', 'your-webhook-here');
 define('DISCORD_MESSAGE_ID', 'bobot-message-id-here');
 
 // Bobot's home directory, if not working, specify by Yourself
-define('BOBOT_HOME_DIR', substr($_SERVER['PHP_SELF'], 0, -9));
+define('BOBOT_HOME_DIR', substr($_SERVER['PHP_SELF'], 0, -9));      // Apache compatible
+// define('BOBOT_HOME_DIR', substr($_SERVER['DOCUMENT_URI'], 0, -9));  // Nginx compatible
 
 // default avatar path
 define('DEFAULT_AVATAR_PATH', 'http://' . $_SERVER['HTTP_HOST'] . BOBOT_HOME_DIR . 'bobot.png');
