@@ -22,11 +22,12 @@ location /path/to/bobot {
 
 1. Clone this repo or download it. Also configure Discord webhook.
 2. Enter the necessary data in the configuration file (without message URL)
-3. Upload integration files to Your public server
-4. Send message via webhook. To do that, use following URL: `http://your-server.com/path/to/bobot/?ANTISPAM_KEY&message=YOUR_MESSAGE`. Replace `ANTISPAM_KEY` with the one from Your configuration.
-5. From Discord, copy Bobot's message ID (You'll probably need developer mode enabled) and update Your configuration. You may test it using [ReqBin](https://reqbin.com) and `sample.json`
-6. Configure Bobot HTTP request (or ask maintainers for it) - send HTTP POST request with `application/json` data to `http://your-server.com/path/to/bobot/?ANTISPAM_KEY`
-7. You can access Bobot website using `http://your-server.com/path/to/bobot/results`. See `config.php` for more URLs.
+3. Upload integration files to Your public server. Remember to change permissions of `bobot.json` (`chmod a+w bobot.json`).
+4. Create `logs/` directory with correct permissions (`chmod 777 logs/`).
+5. Send message via webhook. To do that, use following URL: `http://your-server.com/path/to/bobot/?ANTISPAM_KEY&message=YOUR_MESSAGE`. Replace `ANTISPAM_KEY` with the one from Your configuration.
+6. From Discord, copy Bobot's message ID (You'll probably need developer mode enabled) and update Your configuration. You may test it using [ReqBin](https://reqbin.com) and `sample.json`
+7. Configure Bobot HTTP request (or ask maintainers for it) - send HTTP POST request with `application/json` data to `http://your-server.com/path/to/bobot/?ANTISPAM_KEY`
+8. You can access Bobot website using `http://your-server.com/path/to/bobot/results`. See `config.php` for more URLs.
 
 # FAQ
 
