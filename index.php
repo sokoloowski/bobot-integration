@@ -34,7 +34,6 @@ if (isset($_GET[ANTISPAM_CODE])) {
         file_put_contents(__DIR__ . '/bobot.json', json_encode($db));
         $message = "";
         foreach ($db as $team => $details) {
-            $place = $key + 1;
             $message .= '`' . ($place >= 10 ? $place : ' ' . $place) . '.` ' . $team .
                 ' - ' . $details['points'] . ' pkt' . PHP_EOL;
         }
@@ -56,15 +55,16 @@ if (isset($_GET[ANTISPAM_CODE])) {
     if ($_SERVER['REQUEST_URI'] == BOBOT_HOME_DIR . 'results') {
         echo heading('Ranking', 'Sprawdź swój wynik, porównaj go z innymi', true);
         echo table(['#', 'Nazwa grupy', 'Punkty', 'Aktualizacja', '']);
+        $place = 1;
         foreach ($bobot_data as $team => $details) {
-            $place = $key + 1;
             echo '<tr' . ($team['points'] == 10 ? ' class="winner"' : '') . '>
-            <td>' . $place . '</td>
-            <td>' . $team . '</td>
-            <td>' . $details['points'] . '</td>
-            <td>' . $details['last_update'] . '</td>
-            <td><a href="' . BOBOT_HOME_DIR . 'results/' . $team . '">Szczegóły&nbsp;»</td>
-          </tr>';
+                <td>' . $place . '</td>
+                <td>' . $team . '</td>
+                <td>' . $details['points'] . '</td>
+                <td>' . $details['last_update'] . '</td>
+                <td><a href="' . BOBOT_HOME_DIR . 'results/' . $team . '">Szczegóły&nbsp;»</td>
+            </tr>';
+            $place++;
         }
         echo footer();
     } elseif ($_SERVER['REQUEST_URI'] == '' . BOBOT_HOME_DIR . 'results/raw') {
