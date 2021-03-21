@@ -74,7 +74,7 @@ if (isset($_GET[ANTISPAM_CODE])) {
         echo heading('Błędy', 'Wykryte problemy u zespołu ' . $team_name);
         echo table(['Lista błędów']);
         foreach ($bobot_data as $team => $details) {
-            if ($team['group'] == $team_name) {
+            if ($team == $team_name) {
                 foreach ($details['issues'] as $issue)
                     echo '<tr><td><code>' . $issue . '</code></td></tr>';
                 if (count($details['issues']) == 0)
