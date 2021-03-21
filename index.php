@@ -9,20 +9,34 @@ if (isset($_GET[ANTISPAM_CODE])) {
         send_discord_message($_GET['message'], DISCORD_WEBHOOK);
     } else {
         $json = file_get_contents('php://input');
-        file_put_contents(__DIR__ . '/bobot.json', $json);
         $log_path = __DIR__ . '/logs/' . date('Y-m-d');
         if (!is_dir($log_path))
             mkdir($log_path);
         file_put_contents($log_path . '/' . date('H-i') . '.json', $json);
+
+        $db = json_decode(file_get_contents(__DIR__ . '/bobot.json'), true);
         $bobot_data = json_decode($json, true);
-        usort($bobot_data, function ($team1, $team2) {
-            return $team2['points'] <=> $team1['points'];
+        // usort($bobot_data, function ($team1, $team2) {
+        //     return $team2['points'] <=> $team1['points'];
+        // });
+        foreach ($bobot_data as $team) {
+            $db[$team['group']] = [
+                'points' => $team['points'],
+                'issues' => $team['issues'],
+                'errors' => $team['errors'],
+                'last_update' => date('Y-m-d H:i')
+            ];
+        }
+        ksort($db);
+        uasort($arr, function ($team1, $team2) {
+            return $team2['pkt'] <=> $team1['pkt'];
         });
+        file_put_contents(__DIR__ . '/bobot.json', json_encode($db));
         $message = "";
-        foreach ($bobot_data as $key => $team) {
+        foreach ($db as $team => $details) {
             $place = $key + 1;
-            $message .= '`' . ($place >= 10 ? $place : ' ' . $place) . '.` ' . $team['group'] .
-                ' - ' . $team['points'] . ' pkt' . PHP_EOL;
+            $message .= '`' . ($place >= 10 ? $place : ' ' . $place) . '.` ' . $team .
+                ' - ' . $details['points'] . ' pkt' . PHP_EOL;
         }
         $message .= '---' . PHP_EOL .
             '[Więcej informacji](http://' . $_SERVER['HTTP_HOST'] . BOBOT_HOME_DIR . 'results)' . PHP_EOL .
