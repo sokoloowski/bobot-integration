@@ -1,6 +1,6 @@
 <?php
 
-function heading($header, $subheader)
+function heading($header, $subheader, $leaderboard = false)
 {
     return '<!DOCTYPE html><html lang="pl"><head>
         <meta charset="utf-8">
@@ -12,11 +12,12 @@ function heading($header, $subheader)
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css">
         <link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer/sticky-footer.css" rel="stylesheet">
-        <style>
+        '.(($leaderboard) ? 
+        '<style>
             tbody tr:nth-of-type(1), tbody tr.winner { background: #ffd70088!important; }
             tbody tr:nth-of-type(2) { background: #c0c0c088!important; }
             tbody tr:nth-of-type(3) { background: #cd7f3288!important; }
-        </style>
+        </style>' : '') .'
     </head><body>
         <main role="main" class="container">
           <h1 class="mt-5">' . $header . '</h1>
@@ -34,12 +35,14 @@ function table($header)
     $res .= '</tr>
                   </thead>
                   <tbody>';
+    echo $res;
 }
 
-function footer() {
+function footer()
+{
     return '</tbody></table></div></main><footer class="footer"><div class="container">
         <span class="text-muted">Ostatnia aktualizacja: ' . date('d.m.Y', filemtime(__DIR__ . '/bobot.json')) .
-                ' o ' . date('H:i', filemtime(__DIR__ . '/bobot.json')) . '</span></div></footer></body></html>';
+        ' o ' . date('H:i', filemtime(__DIR__ . '/bobot.json')) . '</span></div></footer></body></html>';
 }
 
 function send_discord_embed($title, $url, $message, $webhook, $name = 'Bobot', $avatar_url = DEFAULT_AVATAR_PATH)
