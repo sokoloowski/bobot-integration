@@ -23,4 +23,4 @@ define('DISCORD_MESSAGE_ID', 'bobot-message-id-here');
 define('BOBOT_HOME_DIR', substr($_SERVER['PHP_SELF'], 0, -9));
 
 // default avatar path
-define('DEFAULT_AVATAR_PATH', BOBOT_HOME_DIR . 'bobot.png');
+define('DEFAULT_AVATAR_PATH', 'http://' . $_SERVER['HTTP_HOST'] . BOBOT_HOME_DIR . 'bobot.png');
