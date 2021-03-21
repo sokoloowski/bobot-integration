@@ -73,17 +73,17 @@ if (isset($_GET[ANTISPAM_CODE])) {
         $team_name = substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
         echo heading('Błędy', 'Wykryte problemy u zespołu ' . $team_name, 'Zaktualizowano ' . $bobot_data[$team_name]['last_updated']);
         echo table(['Lista błędów']);
-        if (count($$bobot_data[$team_name]['issues']) == 0)
+        if (count($bobot_data[$team_name]['issues']) == 0)
             echo '<tr><td><code>Nie znaleziono problemów</code></td></tr>';
         else
             foreach ($bobot_data[$team_name]['issues'] as $issue)
                 echo '<tr><td><code>' . $issue . '</code></td></tr>';
         echo '</tbody></table>';
         echo table(['Problemy z repozytorium']);
-        if (count($$bobot_data[$team_name]['errors']) == 0)
+        if (count($bobot_data[$team_name]['errors']) == 0)
             echo '<tr><td><code>Nie znaleziono problemów</code></td></tr>';
         else
-            foreach ($$bobot_data[$team_name]['errors'] as $error)
+            foreach ($bobot_data[$team_name]['errors'] as $error)
                 echo '<tr><td><code>' . $error . '</code></td></tr>';
         echo footer();
     } else {

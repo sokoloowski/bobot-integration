@@ -12,16 +12,17 @@ function heading($header, $subheader, $paragraph = '', $leaderboard = false)
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css">
         <link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer/sticky-footer.css" rel="stylesheet">
-        '.(($leaderboard) ? 
+        ' . ($leaderboard ?
         '<style>
             tbody tr:nth-of-type(1), tbody tr.winner { background: #ffd70088!important; }
             tbody tr:nth-of-type(2) { background: #c0c0c088!important; }
             tbody tr:nth-of-type(3) { background: #cd7f3288!important; }
-        </style>' : '') .'
+        </style>' : '') . '
     </head><body>
         <main role="main" class="container">
           <h1 class="mt-5">' . $header . '</h1>
           <p class="lead">' . $subheader . '</p>
+          ' . ($paragraph ? '<p>' . $paragraph . '</p>' : '') . '
           
           <div class="table-responsive">';
 }
