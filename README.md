@@ -1,6 +1,22 @@
 # First things first...
 
-This integration is for [Bobot](https://gitlab.com/bobot-is-a-bot) maintainers and AGH UST students!
+This integration is for [Bobot](https://gitlab.com/bobot-is-a-bot) maintainers and AGH UST students
+
+# Supported web servers
+
+## Apache
+
+Works right out-of-the-box
+
+## Nginx
+
+You need to add following lines to Your config:
+
+```nginx
+location /path/to/bobot {
+    try_files $uri $uri/ /path/to/bobot/index.php$is_args$args;
+}
+```
 
 # How to use?
 
