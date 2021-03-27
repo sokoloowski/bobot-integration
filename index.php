@@ -36,7 +36,7 @@ if (isset($_GET[ANTISPAM_CODE])) {
         uasort($db, function ($team1, $team2) {
             return $team2['points'] <=> $team1['points'];
         });
-        file_put_contents(__DIR__ . '/bobot.json', json_encode($db));
+        file_put_contents(__DIR__ . '/bobot.json', json_encode($db, JSON_PRETTY_PRINT));
         $message = "";
         $place = 1;
         foreach ($db as $team => $details) {
