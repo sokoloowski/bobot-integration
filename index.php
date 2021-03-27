@@ -4,8 +4,9 @@ require __DIR__ . '/functions.php';
 
 if (isset($_GET[ANTISPAM_CODE])) {
     $message_url = DISCORD_WEBHOOK . '/messages/' . DISCORD_MESSAGE_ID;
-
-    if (isset($_GET['message']) && isset($_GET['pass']) && $_GET['pass'] == BOBOT_PASSWORD) {
+    if (isset($_GET['clear'])) {
+        file_put_contents(__DIR__ . '/bobot.json', json_encode([], JSON_PRETTY_PRINT));
+    } elseif (isset($_GET['message']) && isset($_GET['pass']) && $_GET['pass'] == BOBOT_PASSWORD) {
         (isset($_GET['name']) && $_GET['name'] != '') ?
             ((isset($_GET['avatar']) && $_GET['avatar'] != '') ?
                 send_discord_message($_GET['message'], DISCORD_WEBHOOK, $_GET['name'], $_GET['avatar']) :
