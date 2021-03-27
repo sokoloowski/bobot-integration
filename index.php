@@ -5,8 +5,12 @@ require __DIR__ . '/functions.php';
 if (isset($_GET[ANTISPAM_CODE])) {
     $message_url = DISCORD_WEBHOOK . '/messages/' . DISCORD_MESSAGE_ID;
 
-    if (isset($_GET['message'])) {
-        send_discord_message($_GET['message'], DISCORD_WEBHOOK);
+    if (isset($_GET['message']) && isset($_GET['pass']) && $_GET['pass'] == BOBOT_PASSWORD) {
+        (isset($_GET['name']) && $_GET['name'] != '') ?
+            ((isset($_GET['avatar']) && $_GET['avatar'] != '') ?
+                send_discord_message($_GET['message'], DISCORD_WEBHOOK, $_GET['name'], $_GET['avatar']) :
+                send_discord_message($_GET['message'], DISCORD_WEBHOOK, $_GET['name'])) :
+            send_discord_message($_GET['message'], DISCORD_WEBHOOK);
     } else {
         $json = file_get_contents('php://input');
         if ($json == '') die('Empty message! Aborting...');
