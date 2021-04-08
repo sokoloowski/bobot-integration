@@ -4,14 +4,19 @@ require __DIR__ . '/functions.php';
 
 if (isset($_GET[ANTISPAM_CODE])) {
     $message_url = DISCORD_WEBHOOK . '/messages/' . DISCORD_MESSAGE_ID;
-    if (isset($_GET['clear'])) {
-        file_put_contents(__DIR__ . '/bobot.json', json_encode([], JSON_PRETTY_PRINT));
-    } elseif (isset($_GET['message']) && isset($_GET['pass']) && $_GET['pass'] == BOBOT_PASSWORD) {
+    if (isset($_GET['message']) && isset($_GET['pass']) && $_GET['pass'] == BOBOT_PASSWORD) {
         (isset($_GET['name']) && $_GET['name'] != '') ?
             ((isset($_GET['avatar']) && $_GET['avatar'] != '') ?
                 send_discord_message($_GET['message'], DISCORD_WEBHOOK, $_GET['name'], $_GET['avatar']) :
                 send_discord_message($_GET['message'], DISCORD_WEBHOOK, $_GET['name'])) :
             send_discord_message($_GET['message'], DISCORD_WEBHOOK);
+    } elseif (isset($_GET['spanko'])) {
+        file_put_contents(__DIR__ . '/bobot.json', json_encode([], JSON_PRETTY_PRINT));
+        $message = 'Spanko :zzz:' . PHP_EOL;
+        $message .= '---' . PHP_EOL .
+            '[Więcej informacji](http://' . $_SERVER['HTTP_HOST'] . BOBOT_HOME_DIR . 'results)' . PHP_EOL .
+            'Zaktualizowano ' . date('d.m.Y') . ' o ' . date('H:i');
+        update_discord_message($message, $message_url);
     } else {
         $json = file_get_contents('php://input');
         if ($json == '') die('Empty message! Aborting...');
