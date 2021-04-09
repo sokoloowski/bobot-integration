@@ -70,7 +70,7 @@ if (isset($_GET[ANTISPAM_CODE])) {
         echo table(['#', 'Nazwa grupy', 'Punkty', 'Aktualizacja', '']);
         $place = 1;
         foreach ($bobot_data as $team => $details) {
-            echo '<tr' . ($team['points'] == 10 ? ' class="winner"' : '') . '>
+            echo '<tr' . ($details['points'] == 10 ? ' class="winner"' : '') . '>
                 <td>' . $place . '</td>
                 <td>' . $team . '</td>
                 <td>' . $details['points'] . '</td>
