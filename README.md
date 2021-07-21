@@ -10,7 +10,7 @@ Works right out-of-the-box
 
 ## Nginx
 
-You need to add following lines to Your config:
+You need to add following lines to Your Nginx config:
 
 ```nginx
 location /path/to/bobot {
@@ -46,3 +46,14 @@ No, this integration will edit it's message, so the best practice is to make a s
 ## Can I send messages as Bobot?
 
 Yes, use HTTP GET `message` like above to send messages as Bobot. This one can be used by maintainers to communicate with students about Bobot's issues. To mention user, include `<@USER_ID>` in Your message, to mention role, use `<@&ROLE_ID>`. Remember to encode Your message (You may use `urlencode()` in PHP).
+
+# Screenshots
+
+## Discord
+
+![image](https://user-images.githubusercontent.com/39133910/126449224-62ac3413-a430-4fb6-95ea-cf374821af37.png)
+
+## Webpage
+
+![image](https://user-images.githubusercontent.com/39133910/126450759-1d8aee98-6479-4f43-9a3f-05eff8c3388a.png)
+
