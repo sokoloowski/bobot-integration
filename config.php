@@ -24,7 +24,7 @@ define('BOBOT_HOME_DIR', substr($_SERVER['PHP_SELF'], 0, -9));      // Apache co
 // define('BOBOT_HOME_DIR', substr($_SERVER['DOCUMENT_URI'], 0, -9));  // Nginx compatible
 
 // default avatar path
-define('DEFAULT_AVATAR_PATH', 'http://' . $_SERVER['HTTP_HOST'] . BOBOT_HOME_DIR . 'bobot.png');
+define('DEFAULT_AVATAR_PATH', 'https://gitlab.com/uploads/-/system/user/avatar/8352932/avatar.png');
 
 // password to sending messages
 define('BOBOT_PASSWORD', 'your-password-here');
